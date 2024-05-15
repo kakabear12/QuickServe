@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using QuickServe.Application.Interfaces.Users;
 using QuickServe.Application.Services;
 using QuickServe.Application.ViewModels.UserDTO;
@@ -16,6 +17,7 @@ namespace QuickServe.WebAPI.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> GetAccountList()
         {
             var users = await _accountService.GetUserAsync();
