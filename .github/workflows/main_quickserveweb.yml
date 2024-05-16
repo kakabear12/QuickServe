@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy ASP.Net Core app to Azure Web App - quickserve
+name: Build and deploy ASP.Net Core app to Azure Web App - QuickServeWeb
 
 on:
   push:
@@ -52,15 +52,15 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v1
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_8C4D17565F4F467AB0C42D0317F8A1D0 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_8BB6225E3BE34751B8B9DE0E67FA3C42 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_2F46E36662B44BE383295CCFF8080BA1 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_4944E23F7E10411BB1620C6CBD1552FC }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_CC11867E91AB4C62A054AE70BD553A92 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_431D405558904C4181809F15271D75A7 }}
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'quickserve'
+          app-name: 'QuickServeWeb'
           slot-name: 'Production'
           package: .
           
