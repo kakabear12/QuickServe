@@ -1,4 +1,4 @@
-using QuickServe.Application.Commons;
+﻿using QuickServe.Application.Commons;
 using QuickServe.WebAPI;
 using QuickServe.Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -15,12 +15,11 @@ var configuration = builder.Configuration.GetSection("AppConfiguration").Get<App
 
 if (configuration == null || string.IsNullOrEmpty(configuration.DatabaseConnection))
 {
-    throw new ArgumentNullException(nameof(configuration.DatabaseConnection), "Chu?i k?t n?i c? s? d? li?u ch?a ???c c?u h�nh.");
+    throw new ArgumentNullException(nameof(configuration.DatabaseConnection), "Chuỗi kết nối cơ sở dữ liệu chưa được cấu hình.");
 }
 
 
 // parse the configuration in appsettings
-configuration = builder.Configuration.Get<AppConfiguration>() ?? new AppConfiguration();
 builder.Services.AddInfrastructureService(configuration.DatabaseConnection);
 builder.Services.AddWebAPIService();
 builder.Services.AddSingleton(configuration);
