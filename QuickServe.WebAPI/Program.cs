@@ -13,11 +13,6 @@ var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration.Get<AppConfiguration>() ?? new AppConfiguration();
 
 
-if (configuration == null || string.IsNullOrEmpty(configuration.DatabaseConnection))
-{
-    throw new ArgumentNullException(nameof(configuration.DatabaseConnection), "Chuỗi kết nối cơ sở dữ liệu chưa được cấu hình.");
-}
-
 
 // parse the configuration in appsettings
 builder.Services.AddInfrastructureService(configuration.DatabaseConnection);

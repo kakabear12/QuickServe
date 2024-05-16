@@ -27,10 +27,7 @@ namespace QuickServe.Infrastructure
     {
         public static IServiceCollection AddInfrastructureService(this IServiceCollection services, string databaseConnection)
         {
-            if (string.IsNullOrEmpty(databaseConnection))
-            {
-                throw new ArgumentNullException(nameof(databaseConnection), "Chuỗi kết nối cơ sở dữ liệu là bắt buộc.");
-            }
+
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddScoped<IUserRepository, UserRepository>();
