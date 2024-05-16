@@ -10,9 +10,17 @@ using QuickServe.WebAPI.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var configuration = builder.Configuration.GetSection("AppConfiguration").Get<AppConfiguration>();
+
+
+if (configuration == null || string.IsNullOrEmpty(configuration.DatabaseConnection))
+{
+    throw new ArgumentNullException(nameof(configuration.DatabaseConnection), "Chu?i k?t n?i c? s? d? li?u ch?a ???c c?u hình.");
+}
+
 
 // parse the configuration in appsettings
-var configuration = builder.Configuration.Get<AppConfiguration>() ?? new AppConfiguration();
+configuration = builder.Configuration.Get<AppConfiguration>() ?? new AppConfiguration();
 builder.Services.AddInfrastructureService(configuration.DatabaseConnection);
 builder.Services.AddWebAPIService();
 builder.Services.AddSingleton(configuration);
