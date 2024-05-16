@@ -27,7 +27,10 @@ namespace QuickServe.Infrastructure
     {
         public static IServiceCollection AddInfrastructureService(this IServiceCollection services, string databaseConnection)
         {
-
+            if (string.IsNullOrEmpty(databaseConnection))
+            {
+                throw new ArgumentNullException(nameof(databaseConnection), "Connection string cannot be null or empty.");
+            }
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddScoped<IUserRepository, UserRepository>();
