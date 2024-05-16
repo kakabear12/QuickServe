@@ -12,7 +12,7 @@ using QuickServe.Infrastructure;
 namespace QuickServe.Infrastructure.Migrations
 {
     [DbContext(typeof(QuickServeContext))]
-    [Migration("20240515005447_InitialDB")]
+    [Migration("20240516035408_InitialDB")]
     partial class InitialDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
