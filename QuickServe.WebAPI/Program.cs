@@ -10,7 +10,7 @@ using QuickServe.WebAPI.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var configuration = builder.Configuration.GetSection("AppConfiguration").Get<AppConfiguration>();
+var configuration = builder.Configuration.Get<AppConfiguration>() ?? new AppConfiguration();
 
 
 if (configuration == null || string.IsNullOrEmpty(configuration.DatabaseConnection))
