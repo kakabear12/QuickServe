@@ -16,6 +16,10 @@ namespace QuickServe.Domain.Entities
         [StringLength(40)]
         public string Name { get; set; } = null!;
 
+        [Required]
+        [StringLength(20)]
+        public string Status { get; set; } = null!;
+
         public virtual ICollection<Ingredient> Ingredients { get; set; }
     }
 }
