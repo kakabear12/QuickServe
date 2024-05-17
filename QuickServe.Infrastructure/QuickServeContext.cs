@@ -32,11 +32,11 @@ namespace QuickServe.Infrastructure
         public DbSet<RefreshToken> RefreshTokens { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            /*var builder = new ConfigurationBuilder()
+            var builder = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
             .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
             IConfigurationRoot configuration = builder.Build();
-            optionsBuilder.UseSqlServer(configuration.GetConnectionString("MyDB"));*/
+            optionsBuilder.UseSqlServer(configuration.GetConnectionString("MyDB"));
         }
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
         protected override void OnModelCreating(ModelBuilder modelBuilder)
