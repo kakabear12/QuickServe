@@ -20,6 +20,10 @@ using QuickServe.Infrastructure.Repositories.Roles;
 using QuickServe.Application.Services.Authenticates;
 using QuickServe.Application.IRepositories.RefreshTokens;
 using QuickServe.Infrastructure.Repositories.RefreshTokens;
+using QuickServe.Application.IRepositories.Ingredient_Type;
+using QuickServe.Application.Interfaces.IngredientTypes;
+using QuickServe.Application.Services.Ingredient_Type;
+using QuickServe.Infrastructure.Repositories.IngredientTypeRepository;
 
 namespace QuickServe.Infrastructure
 {
@@ -41,6 +45,8 @@ namespace QuickServe.Infrastructure
             services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
 
             services.AddScoped<IAuthenticationService, AuthenticationService>();
+            services.AddScoped<IIngredientTypeRepository, IngredientTypeRepository>();
+            services.AddScoped<IIngredientTypeService, IngredientTypeService>();
 
             services.AddSingleton<ICurrentTime, CurrentTime>();
             services.AddDbContext<QuickServeContext>(options =>

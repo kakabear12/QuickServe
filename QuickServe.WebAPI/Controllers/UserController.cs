@@ -4,13 +4,29 @@ using QuickServe.Application.Interfaces.Users;
 using QuickServe.Application.Services;
 using QuickServe.Application.ViewModels.UserDTO;
 using QuickServe.Domain.Entities;
+using System.Security.Claims;
 
 namespace QuickServe.WebAPI.Controllers
 {
     public class UserController : BaseController
     {
         private readonly IUserService _accountService;
+        private int UserID => int.Parse(FindClaim(ClaimTypes.NameIdentifier));
+        private string FindClaim(string claimName)
+        {
 
+            var claimsIdentity = HttpContext.User.Identity as ClaimsIdentity;
+
+            var claim = claimsIdentity.FindFirst(claimName);
+
+            if (claim == null)
+            {
+                return null;
+            }
+
+            return claim.Value;
+
+        }
         public UserController(IUserService accountService)
         {
             _accountService = accountService;
@@ -38,7 +54,7 @@ namespace QuickServe.WebAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateUser([FromBody] CreatedUserDTO createdAccountDTO)
         {
-            var createdAccount = await _accountService.CreateUserAsync(createdAccountDTO);
+            var createdAccount = await _accountService.CreateUserAsync(createdAccountDTO, UserID);
 
             
 
@@ -65,7 +81,7 @@ namespace QuickServe.WebAPI.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateUser(int id, [FromBody] UserDTO accountDTO)
         {
-            var updatedUser = await _accountService.UpdateUserAsync(id, accountDTO);
+            var updatedUser = await _accountService.UpdateUserAsync(id, accountDTO, UserID);
             if (!updatedUser.Success)
             {
                 return NotFound(updatedUser);

@@ -11,7 +11,11 @@ namespace QuickServe.Application.Interfaces.IngredientTypes
 {
     public interface IIngredientTypeService
     {
-      
+        Task<ServiceResponse<IEnumerable<IngredientTypeDTO>>> GetAllIngredientTypeAsync();
+        Task<ServiceResponse<IngredientTypeDTO>> GetIngredientTypeAsync(int id);
+        Task<ServiceResponse<IngredientTypeDTO>> CreateIngredientTypeAsync(AddUpdateIngredientTypeDTO IngredientTypeDto, int userId);
+        Task<ServiceResponse<IngredientTypeDTO>> UpdateIngredientTypeAsync(int id, AddUpdateIngredientTypeDTO IngredientTypeDto, int userId);
+        Task<ServiceResponse<bool>> DeleteIngredientTypeAsync(int id);
         
     }
 }

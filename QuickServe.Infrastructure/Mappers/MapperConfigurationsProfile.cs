@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using QuickServe.Application.ViewModels.IngredientType;
 using QuickServe.Application.ViewModels.Roles;
 using QuickServe.Application.ViewModels.UserDTO;
 using QuickServe.Domain.Entities;
@@ -33,7 +34,9 @@ namespace QuickServe.Infrastructure.Mappers
             CreateMap<RegisterUserDTO, User>();
             CreateMap<RegisterUserDTO, UserDTO>();
 
-           
+            CreateMap<IngredientType, IngredientTypeDTO>().ReverseMap();
+            CreateMap<IngredientType, AddUpdateIngredientTypeDTO>().ReverseMap();
+            CreateMap<AddUpdateIngredientTypeDTO, IngredientTypeDTO>().ReverseMap();
         }
     }
 }

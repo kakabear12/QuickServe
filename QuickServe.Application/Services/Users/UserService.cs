@@ -27,10 +27,10 @@ namespace QuickServe.Application.Services.Users
             _mapper = mapper;
         }
 
-        public async Task<ServiceResponse<UserDTO>> CreateUserAsync(CreatedUserDTO createdUserDTO)
+        public async Task<ServiceResponse<UserDTO>> CreateUserAsync(CreatedUserDTO createdUserDTO, int userId)
         {
             var response = new ServiceResponse<UserDTO>();
-
+            var loginAccount =  await _unitOfWork.UserRepository.GetByIdAsync(userId);
            
 
             var exist = await _unitOfWork.UserRepository.CheckEmailNameExited(createdUserDTO.Email);
@@ -93,7 +93,10 @@ namespace QuickServe.Application.Services.Users
                 account.Status = UserStatus.Active.ToString();
 
                 account.Role = await _unitOfWork.RoleRepository.GetRoleByRoleName(createdUserDTO.RoleName);
-
+                account.CreatedBy = loginAccount.Username;
+                account.UpdatedBy = loginAccount.Username;
+                account.CreatedDate = DateTime.Now;
+                account.UpdatedDate = DateTime.Now;
 
                 await _unitOfWork.UserRepository.AddAsync(account);
 
@@ -206,14 +209,14 @@ namespace QuickServe.Application.Services.Users
             return _response;
         }
 
-        public async Task<ServiceResponse<UserDTO>> UpdateUserAsync(int id, UserDTO accountDTO)
+        public async Task<ServiceResponse<UserDTO>> UpdateUserAsync(int id, UserDTO accountDTO, int userId)
         {
             var response = new ServiceResponse<UserDTO>();
 
             try
             {
                 var existingUser = await _unitOfWork.UserRepository.GetByIdAsync(id);
-
+                var user = await _unitOfWork.UserRepository.GetByIdAsync(userId);
                 if (existingUser == null)
                 {
                     response.Success = false;
@@ -227,7 +230,8 @@ namespace QuickServe.Application.Services.Users
                     response.Message = "User is deleted in system";
                     return response;
                 }
-
+                existingUser.UpdatedBy = user.UpdatedBy;
+                existingUser.UpdatedDate = DateTime.Now;
                 // Map accountDT0 => existingUser
                 var updated = _mapper.Map(accountDTO, existingUser);
                

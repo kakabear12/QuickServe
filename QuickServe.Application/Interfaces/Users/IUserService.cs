@@ -11,8 +11,8 @@ namespace QuickServe.Application.Interfaces.Users
     public interface IUserService
     {
         Task<ServiceResponse<IEnumerable<UserDTO>>> GetUserAsync();
-        Task<ServiceResponse<UserDTO>> CreateUserAsync(CreatedUserDTO createdUserDTO);
-        Task<ServiceResponse<UserDTO>> UpdateUserAsync(int id, UserDTO userDTO);
+        Task<ServiceResponse<UserDTO>> CreateUserAsync(CreatedUserDTO createdUserDTO, int userId);
+        Task<ServiceResponse<UserDTO>> UpdateUserAsync(int id, UserDTO userDTO, int userId);
         Task<ServiceResponse<bool>> DeleteUserAsync(int id);
         Task<ServiceResponse<string>> ChangePasswordAsync(int userId, ChangePasswordDTO changePasswordDto);
         Task<ServiceResponse<UpdateProfileDTO>> UpdateProfileAsync(int id, UpdateProfileDTO userDTO);
